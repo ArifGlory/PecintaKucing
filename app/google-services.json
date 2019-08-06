@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "980177066307",
+    "firebase_url": "https://pecintakucinglampung-85c0a.firebaseio.com",
+    "project_id": "pecintakucinglampung-85c0a",
+    "storage_bucket": "pecintakucinglampung-85c0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980177066307:android:a158301dd87e6c5f",
+        "android_client_info": {
+          "package_name": "myproject.pecintakucinglampung"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980177066307-bal83u7gqqlpdm5bluihii5ahe2jjj8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "myproject.pecintakucinglampung",
+            "certificate_hash": "ea6e4d451b776339d2b6ce82d3e7bf3bcf25299f"
+          }
+        },
+        {
+          "client_id": "980177066307-s5m0n7t76t2hkg283gus9fhp0vk2rfbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoThGZZ-yzUa3cR7ESNyz1eDtql5QXw7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980177066307-s5m0n7t76t2hkg283gus9fhp0vk2rfbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
