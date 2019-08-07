@@ -13,10 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import myproject.pecintakucinglampung.Kelas.Perawatan;
 import myproject.pecintakucinglampung.R;
+import myproject.pecintakucinglampung.activity.DetailPerawatActivity;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 
 /**
@@ -25,7 +32,7 @@ import myproject.pecintakucinglampung.R;
 public class AdapterPerawatan extends RecyclerView.Adapter<AdapterPerawatan.MyViewHolder> {
 
     private Context mContext;
-    private List<Perawatan> PerawatanList;
+    private List<Perawatan> perawatanList;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -36,15 +43,16 @@ public class AdapterPerawatan extends RecyclerView.Adapter<AdapterPerawatan.MyVi
         public MyViewHolder(View view) {
             super(view);
             tvNamaPerawat = (TextView) view.findViewById(R.id.tvNamaPerawat);
+            txtHarga = (TextView) view.findViewById(R.id.tvHarga);
             ivPerawat = view.findViewById(R.id.ivPerawat);
             linePerawat = view.findViewById(R.id.linePerawat);
 
         }
     }
 
-    public AdapterPerawatan(Context mContext, List<Perawatan> PerawatanList) {
+    public AdapterPerawatan(Context mContext, List<Perawatan> perawatanList) {
         this.mContext = mContext;
-        this.PerawatanList = PerawatanList;
+        this.perawatanList = perawatanList;
 
     }
 
@@ -59,17 +67,34 @@ public class AdapterPerawatan extends RecyclerView.Adapter<AdapterPerawatan.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        if (PerawatanList.isEmpty()){
+        if (perawatanList.isEmpty()){
 
-            Log.d("isiPerawatan: ",""+PerawatanList.size());
+            Log.d("isiPerawatan: ",""+perawatanList.size());
         }else {
 
             Resources res = mContext.getResources();
+            NumberFormat format = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+            Locale localeID = new Locale("in", "ID");
+            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
-            final Perawatan Perawatan  = PerawatanList.get(position);
+            final Perawatan perawatan  = perawatanList.get(position);
+            int harga = Integer.parseInt(perawatan.getHarga());
 
+            holder.tvNamaPerawat.setText(perawatan.getNama());
+            holder.txtHarga.setText(formatRupiah.format((double) harga) + " / hari");
+            Glide.with(mContext)
+                    .load(perawatan.getFoto())
+                    .into(holder.ivPerawat);
 
-
+            holder.linePerawat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, DetailPerawatActivity.class);
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("perawatan",perawatan);
+                    mContext.startActivity(intent);
+                }
+            });
 
 
         }
@@ -80,6 +105,6 @@ public class AdapterPerawatan extends RecyclerView.Adapter<AdapterPerawatan.MyVi
     @Override
     public int getItemCount() {
         //return namaWisata.length;
-        return PerawatanList.size();
+        return perawatanList.size();
     }
 }
