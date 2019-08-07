@@ -29,6 +29,7 @@ import com.synnapps.carouselview.ImageListener;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import myproject.pecintakucinglampung.Kelas.SharedVariable;
+import myproject.pecintakucinglampung.MainActivity;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.activity.UbahProfilActivity;
 
@@ -71,12 +72,36 @@ public class FragmentProfil extends Fragment {
         lineUbah = view.findViewById(R.id.lineUbah);
         lineKeluar = view.findViewById(R.id.lineKeluar);
 
+        setView();
 
         pDialogLoading = new SweetAlertDialog(this.getActivity(), SweetAlertDialog.PROGRESS_TYPE);
         pDialogLoading.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialogLoading.setTitleText("Menampilkan data..");
         pDialogLoading.setCancelable(false);
 
+
+        lineUbah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UbahProfilActivity.class);
+                startActivity(intent);
+            }
+        });
+        lineKeluar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fAuth.signOut();
+                Intent i = new Intent(getActivity(), MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+
+        return view;
+    }
+
+    private void setView(){
         tvEmail.setText(fAuth.getCurrentUser().getEmail());
         tvName.setText(SharedVariable.nama);
         tvPhone.setText(SharedVariable.phone);
@@ -86,21 +111,11 @@ public class FragmentProfil extends Fragment {
                     .load(SharedVariable.foto)
                     .into(ivUserProfilePhoto);
         }
-
-        lineUbah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), UbahProfilActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-        return view;
     }
 
-
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        setView();
+    }
 }

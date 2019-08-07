@@ -182,6 +182,8 @@ public class AddcatActivity extends AppCompatActivity {
                         urlGambar
                 );
                 kucing.setIdKucing(timeStamp);
+                kucing.setIsAdopsi("no");
+                kucing.setIsDijual("no");
 
                 ref.document(timeStamp).set(kucing).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

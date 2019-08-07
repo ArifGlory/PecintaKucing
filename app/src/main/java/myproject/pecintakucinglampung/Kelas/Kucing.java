@@ -10,6 +10,8 @@ public class Kucing implements Serializable {
     public String ras;
     public String urlGambar;
     public String idKucing;
+    public String isAdopsi;
+    public String isDijual;
 
     public Kucing(){
 
@@ -21,6 +23,22 @@ public class Kucing implements Serializable {
         this.umur = umur;
         this.ras = ras;
         this.urlGambar = urlGambar;
+    }
+
+    public String getIsAdopsi() {
+        return isAdopsi;
+    }
+
+    public void setIsAdopsi(String isAdopsi) {
+        this.isAdopsi = isAdopsi;
+    }
+
+    public String getIsDijual() {
+        return isDijual;
+    }
+
+    public void setIsDijual(String isDijual) {
+        this.isDijual = isDijual;
     }
 
     public String getIdKucing() {

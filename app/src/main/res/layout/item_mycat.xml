@@ -83,6 +83,8 @@
                 android:background="@drawable/rounded_button_red"
                 android:elevation="5dp"
                 android:text="Setting"
+                android:visibility="invisible"
+                android:id="@+id/btnSetting"
                 android:drawableLeft="@drawable/ic_settings_white_24dp"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"

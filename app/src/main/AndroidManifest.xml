@@ -23,7 +23,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".activity.AddcatActivity"></activity>
+        <activity android:name=".activity.PerawatanActivity"></activity>
+        <activity
+            android:name=".activity.JualBeliActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AdopsiActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DetailcatActivity"
+            android:label="Detail Kucing" />
+        <activity android:name=".activity.AddcatActivity"
+            android:label="Tambah Kucing"/>
         <activity
             android:name=".activity.MycatActivity"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -16,7 +16,10 @@ import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 import myproject.pecintakucinglampung.R;
+import myproject.pecintakucinglampung.activity.AdopsiActivity;
+import myproject.pecintakucinglampung.activity.JualBeliActivity;
 import myproject.pecintakucinglampung.activity.MycatActivity;
+import myproject.pecintakucinglampung.activity.PerawatanActivity;
 
 
 /**
@@ -31,7 +34,7 @@ public class FragmentHome extends Fragment {
 
     CarouselView carouselView;
     int[] sampleImage = {R.drawable.cat_event1,R.drawable.cat_event2,R.drawable.cat_event3};
-    RelativeLayout rlMyCat;
+    RelativeLayout rlMyCat,rlAdopsi,rlJualBeli,rlPerawatan;
 
 
     @Override
@@ -41,6 +44,9 @@ public class FragmentHome extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
         carouselView = view.findViewById(R.id.carouselView);
         rlMyCat = view.findViewById(R.id.rlMyCat);
+        rlAdopsi = view.findViewById(R.id.rlAdopsi);
+        rlJualBeli = view.findViewById(R.id.rlJualBeli);
+        rlPerawatan = view.findViewById(R.id.rlPerawatan);
 
         carouselView.setPageCount(sampleImage.length);
         carouselView.setImageListener(imageListener);
@@ -55,6 +61,27 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MycatActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlAdopsi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AdopsiActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlJualBeli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), JualBeliActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlPerawatan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PerawatanActivity.class);
                 startActivity(intent);
             }
         });

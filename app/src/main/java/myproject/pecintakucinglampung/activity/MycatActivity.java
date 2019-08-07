@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,7 +56,7 @@ public class MycatActivity extends AppCompatActivity {
         btnCreate = findViewById(R.id.btnCreate);
 
         kucingList  = new ArrayList<>();
-        adapter     = new AdapterKucing(getApplicationContext(),kucingList);
+        adapter     = new AdapterKucing(MycatActivity.this,kucingList);
 
         rvMycat.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rvMycat.setHasFixedSize(true);
@@ -123,6 +124,16 @@ public class MycatActivity extends AppCompatActivity {
         super.onResume();
 
         getKucingByPemilik(SharedVariable.userID);
+      //  Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+      //  Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show();
+    }
+
+
 
 }
