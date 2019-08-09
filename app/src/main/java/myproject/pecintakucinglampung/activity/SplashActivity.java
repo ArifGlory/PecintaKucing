@@ -50,7 +50,13 @@ public class SplashActivity extends AppCompatActivity {
             String email = fAuth.getCurrentUser().getEmail();
 
             if (email.equals("admin@gmail.com")){
+                SharedVariable.foto = "no";
+                SharedVariable.phone = "no";
+                SharedVariable.nama = "Admin PKL";
+                SharedVariable.userID = fAuth.getUid();
 
+                i = new Intent(SplashActivity.this, HomeAdmin.class);
+                startActivity(i);
             }else{
                 DocumentReference user = firestore.collection("users").document(SharedVariable.userID);
                 user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

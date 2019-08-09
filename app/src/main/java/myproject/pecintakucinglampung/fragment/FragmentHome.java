@@ -11,10 +11,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
+import java.util.List;
+
+import myproject.pecintakucinglampung.Kelas.Slider;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.activity.AdopsiActivity;
 import myproject.pecintakucinglampung.activity.JualBeliActivity;
@@ -35,6 +40,9 @@ public class FragmentHome extends Fragment {
     CarouselView carouselView;
     int[] sampleImage = {R.drawable.cat_event1,R.drawable.cat_event2,R.drawable.cat_event3};
     RelativeLayout rlMyCat,rlAdopsi,rlJualBeli,rlPerawatan;
+    private List<Slider> sliderList;
+    CollectionReference ref;
+    FirebaseFirestore firestore;
 
 
     @Override
@@ -96,6 +104,10 @@ public class FragmentHome extends Fragment {
             imageView.setImageResource(sampleImage[position]);
         }
     };
+
+    private void getDataSlider(){
+
+    }
 
 
 }

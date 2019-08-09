@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_slider"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Manajemen Slider" />
+
+        <item
+            android:id="@+id/nav_jualbeli"
+            android:icon="@drawable/ic_attach_money_black_24dp"
+            android:title="Data Jual Beli" />
+        <item
+            android:id="@+id/nav_adopsi"
+            android:icon="@drawable/ic_ajukan_24dp"
+            android:title="Data Adopsi" />
+
+        <item
+            android:id="@+id/nav_dokter"
+            android:icon="@drawable/ic_add_black_24dp"
+            android:title="Data Dokter" />
+
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_forum_black_24dp"
+            android:title="Chat" />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout" />
+    </group>
+
+
+</menu>

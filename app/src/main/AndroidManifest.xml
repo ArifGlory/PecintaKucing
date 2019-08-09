@@ -23,8 +23,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".activity.DetailPerawatActivity"
-            android:label="Detail Perawat"></activity>
+        <activity android:name=".admin.AddSliderActivity"></activity>
+        <activity
+            android:name=".admin.KelolaSliderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.HomeAdmin"
+            android:label="Admin PKL"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DetailPerawatActivity"
+            android:label="Detail Perawat" />
         <activity
             android:name=".activity.AjukanPerawatActivity"
             android:label="Ajukan menjadi perawat" />
