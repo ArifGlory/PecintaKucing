@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:layout_above="@+id/rela_editpesan"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rela_editpesan"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/etPesan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_top_bg"
+            android:hint="Ketik pesan"
+            android:textColor="#000"
+            android:padding="10dp"
+            android:textColorHint="#cccccc"
+            android:layout_toLeftOf="@+id/btnKirim"
+            />
+
+        <ImageButton
+            android:id="@+id/btnKirim"
+            android:layout_width="50dp"
+            android:padding="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_send_2_24dp"
+            android:layout_alignParentRight="true"
+            android:onClick="Kirim"
+            style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -23,6 +23,8 @@ import myproject.pecintakucinglampung.Kelas.Slider;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.activity.AdopsiActivity;
 import myproject.pecintakucinglampung.activity.JualBeliActivity;
+import myproject.pecintakucinglampung.activity.ListKesehatanActivity;
+import myproject.pecintakucinglampung.activity.MapsActivity;
 import myproject.pecintakucinglampung.activity.MycatActivity;
 import myproject.pecintakucinglampung.activity.PerawatanActivity;
 
@@ -39,7 +41,7 @@ public class FragmentHome extends Fragment {
 
     CarouselView carouselView;
     int[] sampleImage = {R.drawable.cat_event1,R.drawable.cat_event2,R.drawable.cat_event3};
-    RelativeLayout rlMyCat,rlAdopsi,rlJualBeli,rlPerawatan;
+    RelativeLayout rlMyCat,rlAdopsi,rlJualBeli,rlPerawatan,rlDokter,rlKesehatan;
     private List<Slider> sliderList;
     CollectionReference ref;
     FirebaseFirestore firestore;
@@ -55,6 +57,8 @@ public class FragmentHome extends Fragment {
         rlAdopsi = view.findViewById(R.id.rlAdopsi);
         rlJualBeli = view.findViewById(R.id.rlJualBeli);
         rlPerawatan = view.findViewById(R.id.rlPerawatan);
+        rlDokter = view.findViewById(R.id.rlDokter);
+        rlKesehatan = view.findViewById(R.id.rlKesehatan);
 
         carouselView.setPageCount(sampleImage.length);
         carouselView.setImageListener(imageListener);
@@ -90,6 +94,20 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PerawatanActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlDokter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlKesehatan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListKesehatanActivity.class);
                 startActivity(intent);
             }
         });

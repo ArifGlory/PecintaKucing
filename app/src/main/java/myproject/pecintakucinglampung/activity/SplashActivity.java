@@ -53,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                 SharedVariable.foto = "no";
                 SharedVariable.phone = "no";
                 SharedVariable.nama = "Admin PKL";
+                SharedVariable.email = fAuth.getCurrentUser().getEmail();
                 SharedVariable.userID = fAuth.getUid();
 
                 i = new Intent(SplashActivity.this, HomeAdmin.class);

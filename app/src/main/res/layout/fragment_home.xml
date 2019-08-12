@@ -176,7 +176,7 @@
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                    android:id="@+id/rlLokasiTangki"
+                                    android:id="@+id/rlKesehatan"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1">
@@ -239,7 +239,7 @@
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                    android:id="@+id/rlOjekRequest"
+                                    android:id="@+id/rlDokter"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1">
