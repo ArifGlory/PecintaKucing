@@ -26,8 +26,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import myproject.pecintakucinglampung.Kelas.Perawatan;
 import myproject.pecintakucinglampung.MainActivity;
 import myproject.pecintakucinglampung.R;
+import myproject.pecintakucinglampung.admin.ChatActivity;
 import myproject.pecintakucinglampung.admin.KelolaDokterActivity;
 import myproject.pecintakucinglampung.admin.KelolaSliderActivity;
 import myproject.pecintakucinglampung.fragment.FragmentAdmin;
@@ -125,8 +127,11 @@ public class HomeAdmin extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), ListKesehatanActivity.class);
             startActivity(i);
         }else if (id == R.id.nav_chat){
-           /* Intent i = new Intent(getApplicationContext(), ListKesehatanActivity.class);
-            startActivity(i);*/
+            Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+            startActivity(i);
+        }else if (id == R.id.nav_perawat){
+            Intent i = new Intent(getApplicationContext(), PerawatanActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

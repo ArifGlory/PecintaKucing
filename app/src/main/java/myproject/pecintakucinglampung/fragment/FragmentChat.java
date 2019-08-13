@@ -145,7 +145,7 @@ public class FragmentChat extends Fragment {
     }
 
     private void getChat(){
-        ref.orderBy("idChat", Query.Direction.DESCENDING).limit(50).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        ref.orderBy("idChat", Query.Direction.DESCENDING).limit(100).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 chatList.clear();

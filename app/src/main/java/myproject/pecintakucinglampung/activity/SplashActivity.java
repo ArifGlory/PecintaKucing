@@ -71,6 +71,7 @@ public class SplashActivity extends AppCompatActivity {
 
                             SharedVariable.foto = foto;
                             SharedVariable.phone = nope;
+                            SharedVariable.email = fAuth.getCurrentUser().getEmail();
                             i = new Intent(SplashActivity.this, HomeActivity.class);
                             startActivity(i);
 

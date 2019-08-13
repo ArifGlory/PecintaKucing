@@ -63,6 +63,8 @@ public class ListKesehatanActivity extends AppCompatActivity {
 
         if (SharedVariable.email.equals("admin@gmail.com")){
             btnCreate.setVisibility(View.VISIBLE);
+        }else{
+            btnCreate.setVisibility(View.GONE);
         }
 
         kesehatanList = new ArrayList<>();

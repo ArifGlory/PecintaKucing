@@ -22,8 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".activity.DetailKesehatanActivity"
-            android:label="Detail Kesehatan"></activity>
+        <activity android:name=".admin.UbahDokterActivity"></activity>
+        <activity
+            android:name=".admin.ChatActivity"
+            android:label="Chat" />
+        <activity
+            android:name=".activity.DetailKesehatanActivity"
+            android:label="Detail Kesehatan" />
         <activity android:name=".admin.AddKesehatanActivity" />
         <activity
             android:name=".activity.ListKesehatanActivity"
