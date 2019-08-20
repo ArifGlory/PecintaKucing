@@ -9,6 +9,7 @@ public class Kesehatan implements Serializable {
     public String judul;
     public String deskripsi;
     public String solusi;
+    public String urlGambar;
 
     public Kesehatan(){}
 
@@ -17,6 +18,14 @@ public class Kesehatan implements Serializable {
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.solusi = solusi;
+    }
+
+    public String getUrlGambar() {
+        return urlGambar;
+    }
+
+    public void setUrlGambar(String urlGambar) {
+        this.urlGambar = urlGambar;
     }
 
     public String getIdKesehatan() {

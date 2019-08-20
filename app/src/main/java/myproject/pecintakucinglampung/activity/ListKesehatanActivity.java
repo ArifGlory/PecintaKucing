@@ -103,6 +103,11 @@ public class ListKesehatanActivity extends AppCompatActivity {
                     pDialogLoading.dismiss();
                     for (DocumentSnapshot doc : task.getResult()){
                         Kesehatan kesehatan = doc.toObject(Kesehatan.class);
+                        String urlGambar = "no";
+                        if (doc.get("urlGambar") != null){
+                            urlGambar = doc.get("urlGambar").toString();
+                        }
+                        kesehatan.setUrlGambar(urlGambar);
                         kesehatanList.add(kesehatan);
                     }
                     adapter.notifyDataSetChanged();

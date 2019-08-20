@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public Marker marker_ghost,temp_marker;
     private String idMarker = "";
     private int index;
+    Button btnListDokter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        btnListDokter = findViewById(R.id.btnListDokter);
+
         dokterList = new ArrayList<>();
         pDialogLoading = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialogLoading.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -76,6 +80,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         pDialogLoading.show();
 
         getDataDokter();
+
+        btnListDokter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),KelolaDokterActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

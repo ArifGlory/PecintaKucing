@@ -41,7 +41,12 @@
                     android:padding="20dp">
 
 
-
+                    <ImageView
+                        android:id="@+id/ivKesehatan"
+                        android:src="@drawable/pawprint"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:scaleType="fitCenter" />
 
 
                     <android.support.design.widget.TextInputLayout

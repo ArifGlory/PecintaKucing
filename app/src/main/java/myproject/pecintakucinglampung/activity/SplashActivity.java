@@ -55,6 +55,7 @@ public class SplashActivity extends AppCompatActivity {
                 SharedVariable.nama = "Admin PKL";
                 SharedVariable.email = fAuth.getCurrentUser().getEmail();
                 SharedVariable.userID = fAuth.getUid();
+                SharedVariable.alamat = "Bandarlampung";
 
                 i = new Intent(SplashActivity.this, HomeAdmin.class);
                 startActivity(i);
@@ -68,9 +69,11 @@ public class SplashActivity extends AppCompatActivity {
                             DocumentSnapshot doc = task.getResult();
                             String foto = doc.get("foto").toString();
                             String nope = doc.get("nope").toString();
+                            String alamat = doc.get("alamat").toString();
 
                             SharedVariable.foto = foto;
                             SharedVariable.phone = nope;
+                            SharedVariable.alamat = alamat;
                             SharedVariable.email = fAuth.getCurrentUser().getEmail();
                             i = new Intent(SplashActivity.this, HomeActivity.class);
                             startActivity(i);

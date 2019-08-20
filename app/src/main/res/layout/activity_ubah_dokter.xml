@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Nama Dokter"
                         android:id="@+id/etNama"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textMultiLine"
                         android:textColorHint="@color/black2"
                         android:textColor="@color/black2"
                         />
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Bidang Dokter"
                         android:id="@+id/etBidang"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textMultiLine"
                         android:textColorHint="@color/black2"
                         android:textColor="@color/black2"
                         />

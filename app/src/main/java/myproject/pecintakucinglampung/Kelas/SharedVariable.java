@@ -6,4 +6,5 @@ public class SharedVariable {
     public static String foto = "";
     public static String email = "";
     public static String phone = "";
+    public static String alamat = "";
 }

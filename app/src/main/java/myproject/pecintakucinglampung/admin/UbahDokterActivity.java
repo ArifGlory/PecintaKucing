@@ -44,6 +44,7 @@ import javax.microedition.khronos.opengles.GL;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import myproject.pecintakucinglampung.Kelas.Dokter;
+import myproject.pecintakucinglampung.Kelas.SharedVariable;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.Utils;
 
@@ -154,6 +155,16 @@ public class UbahDokterActivity extends AppCompatActivity {
 
         latitude = dokter.getLat();
         longitude = dokter.getLon();
+
+        if (!SharedVariable.email.equals("admin@gmail.com")){
+            etNama.setEnabled(false);
+            etBidang.setEnabled(false);
+            etPhone.setEnabled(false);
+            etJadwal.setEnabled(false);
+
+            btnAlamat.setVisibility(View.GONE);
+            btnSimpan.setVisibility(View.GONE);
+        }
     }
 
     private void checkValidation() {

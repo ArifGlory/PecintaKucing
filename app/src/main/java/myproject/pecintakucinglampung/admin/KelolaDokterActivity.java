@@ -1,5 +1,6 @@
 package myproject.pecintakucinglampung.admin;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import myproject.pecintakucinglampung.Kelas.Dokter;
+import myproject.pecintakucinglampung.Kelas.SharedVariable;
 import myproject.pecintakucinglampung.Kelas.Slider;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.adapter.AdapterDokter;
@@ -45,6 +47,7 @@ public class KelolaDokterActivity extends AppCompatActivity {
     FloatingActionButton btnCreate;
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,10 @@ public class KelolaDokterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if (!SharedVariable.email.equals("admin@gmail.com")){
+            btnCreate.setVisibility(View.GONE);
+        }
 
         getDataDokter();
     }

@@ -47,7 +47,7 @@ public class FragmentProfil extends Fragment {
     FirebaseFirestore firestore;
     private SweetAlertDialog pDialogLoading,pDialodInfo;
     CollectionReference ref,refUser;
-    TextView tvEmail,tvName,tvPhone;
+    TextView tvEmail,tvName,tvPhone,tvAlamat;
     CircleImageView ivUserProfilePhoto;
     LinearLayout lineUbah,lineKeluar;
     FirebaseUser fbUser;
@@ -68,6 +68,7 @@ public class FragmentProfil extends Fragment {
         tvEmail = view.findViewById(R.id.tvEmail);
         tvPhone = view.findViewById(R.id.tvPhone);
         tvName = view.findViewById(R.id.tvName);
+        tvAlamat = view.findViewById(R.id.tvAlamat);
         ivUserProfilePhoto = view.findViewById(R.id.ivProfPict);
         lineUbah = view.findViewById(R.id.lineUbah);
         lineKeluar = view.findViewById(R.id.lineKeluar);
@@ -105,6 +106,7 @@ public class FragmentProfil extends Fragment {
         tvEmail.setText(fAuth.getCurrentUser().getEmail());
         tvName.setText(SharedVariable.nama);
         tvPhone.setText(SharedVariable.phone);
+        tvAlamat.setText(SharedVariable.alamat);
 
         if (!SharedVariable.foto.equals("no")){
             Glide.with(getActivity())

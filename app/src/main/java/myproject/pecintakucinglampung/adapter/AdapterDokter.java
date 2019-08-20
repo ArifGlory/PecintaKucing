@@ -143,6 +143,16 @@ public class AdapterDokter extends RecyclerView.Adapter<AdapterDokter.MyViewHold
                }
            });
 
+           holder.lineDokter.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent = new Intent(mContext, UbahDokterActivity.class);
+                   intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                   intent.putExtra("dokter",dokter);
+                   mContext.startActivity(intent);
+               }
+           });
+
 
         }
 

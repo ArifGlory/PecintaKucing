@@ -106,6 +106,26 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/black2"
+                        android:theme="@style/myEditTextStyleBlack"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Alamat"
+                            android:id="@+id/etAlamat"
+                            android:inputType="textMultiLine"
+                            android:textColorHint="@color/black2"
+                            android:textColor="@color/black2"
+                            android:drawableEnd="@drawable/ic_place_black_24dp"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
                         android:textColorHint="@color/black2"
                         android:layout_marginTop="10dp"
                         android:theme="@style/myEditTextStyleBlack"

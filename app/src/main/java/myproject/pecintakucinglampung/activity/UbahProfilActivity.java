@@ -45,7 +45,7 @@ import myproject.pecintakucinglampung.Utils;
 
 public class UbahProfilActivity extends AppCompatActivity {
 
-    EditText etPhone;
+    EditText etPhone,etAlamat;
     CircleImageView ivUserProfilePhoto;
     ImageButton btnSimpan;
     private SweetAlertDialog pDialogLoading,pDialodInfo;
@@ -70,6 +70,7 @@ public class UbahProfilActivity extends AppCompatActivity {
 
         btnSimpan = findViewById(R.id.btnSimpan);
         etPhone = findViewById(R.id.etPhone);
+        etAlamat = findViewById(R.id.etAlamat);
         ivUserProfilePhoto = findViewById(R.id.ivProfPict);
 
         pDialogLoading = new SweetAlertDialog(UbahProfilActivity.this, SweetAlertDialog.PROGRESS_TYPE);
@@ -84,6 +85,7 @@ public class UbahProfilActivity extends AppCompatActivity {
         }
 
         etPhone.setText(SharedVariable.phone);
+        etAlamat.setText(SharedVariable.alamat);
 
         ivUserProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,10 +110,12 @@ public class UbahProfilActivity extends AppCompatActivity {
 
     private void checkValidation() {
         String getPhone = etPhone.getText().toString();
+        String getAlamat = etAlamat.getText().toString();
 
         Pattern p = Pattern.compile(Utils.regEx);
 
-        if (getPhone.equals("") || getPhone.length() == 0) {
+        if (getPhone.equals("") || getPhone.length() == 0
+        || getAlamat.equals("") || getAlamat.length() == 0) {
 
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText("Oops...")
@@ -126,6 +130,7 @@ public class UbahProfilActivity extends AppCompatActivity {
 
     private void updateData(){
         if (uri == null){
+            ref.document(SharedVariable.userID).update("alamat",etAlamat.getText().toString());
             ref.document(SharedVariable.userID).update("nope",etPhone.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -136,6 +141,7 @@ public class UbahProfilActivity extends AppCompatActivity {
                                 .setContentText("Data telah diubah")
                                 .show();
                         SharedVariable.phone = etPhone.getText().toString();
+                        SharedVariable.alamat = etAlamat.getText().toString();
                     }else {
                         new SweetAlertDialog(UbahProfilActivity.this, SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("Oops...")
@@ -170,6 +176,7 @@ public class UbahProfilActivity extends AppCompatActivity {
                     // save image to database
                     final String urlGambar = downloadUrl.toString();
                     ref.document(SharedVariable.userID).update("nope",etPhone.getText().toString());
+                    ref.document(SharedVariable.userID).update("alamat",etAlamat.getText().toString());
 
                     ref.document(SharedVariable.userID).update("foto",urlGambar).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -182,6 +189,7 @@ public class UbahProfilActivity extends AppCompatActivity {
                                         .show();
                                 SharedVariable.phone = etPhone.getText().toString();
                                 SharedVariable.foto = urlGambar;
+                                SharedVariable.alamat = etAlamat.getText().toString();
                             }else {
                                 new SweetAlertDialog(UbahProfilActivity.this, SweetAlertDialog.ERROR_TYPE)
                                         .setTitleText("Oops...")
@@ -213,5 +221,11 @@ public class UbahProfilActivity extends AppCompatActivity {
             uri = file;
             ivUserProfilePhoto.setImageURI(uri);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }

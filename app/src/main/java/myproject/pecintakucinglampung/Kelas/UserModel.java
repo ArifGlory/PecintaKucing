@@ -8,6 +8,7 @@ public class UserModel implements Serializable {
     public String email;
     public String nope;
     public String foto;
+    public String alamat;
 
 
     public UserModel(String username, String email, String nope, String foto) {
@@ -21,6 +22,13 @@ public class UserModel implements Serializable {
 
     }
 
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
 
     public String getFoto() {
         return foto;

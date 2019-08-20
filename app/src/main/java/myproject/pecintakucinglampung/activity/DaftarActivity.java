@@ -33,7 +33,7 @@ import myproject.pecintakucinglampung.Utils;
 
 public class DaftarActivity extends AppCompatActivity {
 
-    EditText etNama,etEmail,etNope,etPassword,etPassword2;
+    EditText etNama,etEmail,etNope,etPassword,etPassword2,etAlamat;
     Button btnDaftar;
     private SweetAlertDialog pDialogLoading,pDialodInfo;
     FirebaseFirestore firestore;
@@ -56,6 +56,7 @@ public class DaftarActivity extends AppCompatActivity {
         etNope = findViewById(R.id.etNope);
         etPassword = findViewById(R.id.etPassword);
         etPassword2 = findViewById(R.id.etPassword2);
+        etAlamat = findViewById(R.id.etAlamat);
         btnDaftar = findViewById(R.id.btnDaftar);
 
         pDialogLoading = new SweetAlertDialog(DaftarActivity.this, SweetAlertDialog.PROGRESS_TYPE);
@@ -80,6 +81,7 @@ public class DaftarActivity extends AppCompatActivity {
         String getPassword = etPassword.getText().toString();
         String getConfirmPassword = etPassword2.getText().toString();
         String getPhone = etNope.getText().toString();
+        String getAlamat = etAlamat.getText().toString();
 
         Pattern p = Pattern.compile(Utils.regEx);
         Matcher m = p.matcher(getEmailId);
@@ -89,7 +91,8 @@ public class DaftarActivity extends AppCompatActivity {
                 || getEmailId.equals("") || getEmailId.length() == 0
                 || getPassword.equals("") || getPassword.length() == 0
                 || getConfirmPassword.equals("")
-                || getConfirmPassword.length() == 0) {
+                || getConfirmPassword.length() == 0
+                || getAlamat.length() == 0) {
 
             new SweetAlertDialog(DaftarActivity.this,SweetAlertDialog.ERROR_TYPE)
                     .setContentText("Semua data harus diisi")
@@ -167,6 +170,7 @@ public class DaftarActivity extends AppCompatActivity {
                             etNope.getText().toString(),
                             "no"
                     );
+                    userModel.setAlamat(etAlamat.getText().toString());
 
                     DocumentReference docUser = firestore.collection("users").document(userID);
                     docUser.set(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {

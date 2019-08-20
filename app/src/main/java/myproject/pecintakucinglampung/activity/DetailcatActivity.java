@@ -29,7 +29,7 @@ import myproject.pecintakucinglampung.R;
 
 public class DetailcatActivity extends AppCompatActivity {
 
-    TextView tvNamaKucing,tvUmur,tvRas,tvAdopsi,tvJual;
+    TextView tvNamaKucing,tvUmur,tvRas,tvAdopsi,tvJual,tvAlamat;
     ImageView ivKucing;
     LinearLayout lineAdopsi,lineJual;
     Intent intent;
@@ -40,6 +40,7 @@ public class DetailcatActivity extends AppCompatActivity {
     CardView cardSetting;
     Button btnHubungi;
     private String phonePemilik = "";
+    private String alamatPemilik = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class DetailcatActivity extends AppCompatActivity {
         tvRas = findViewById(R.id.tvRas);
         tvAdopsi = findViewById(R.id.tvAdopsi);
         tvJual = findViewById(R.id.tvJual);
+        tvAlamat = findViewById(R.id.tvAlamat);
         ivKucing = findViewById(R.id.ivKucing);
         lineAdopsi = findViewById(R.id.lineAdopsi);
         lineJual = findViewById(R.id.lineJual);
@@ -195,6 +197,8 @@ public class DetailcatActivity extends AppCompatActivity {
                 pDialogLoading.dismiss();
                 DocumentSnapshot dc = task.getResult();
                 phonePemilik = dc.get("nope").toString();
+                alamatPemilik = dc.get("alamat").toString();
+                tvAlamat.setText(alamatPemilik);
             }
         });
     }
