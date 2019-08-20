@@ -34,6 +34,8 @@ import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.activity.DetailPerawatActivity;
 import myproject.pecintakucinglampung.activity.MycatActivity;
 import myproject.pecintakucinglampung.admin.KelolaSliderActivity;
+import myproject.pecintakucinglampung.admin.UbahDokterActivity;
+import myproject.pecintakucinglampung.admin.UbahSliderActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -107,9 +109,9 @@ public class AdapterSlider extends RecyclerView.Adapter<AdapterSlider.MyViewHold
                @Override
                public boolean onLongClick(View v) {
                    new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
-                           .setTitleText("Hapus Slider")
-                           .setContentText("Anda yakin menghapus slider ini ?")
-                           .setConfirmText("Ya")
+                           .setTitleText("Kelola Slider")
+                           .setContentText("Pilih aksi yang anda inginkan")
+                           .setConfirmText("Hapus")
                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                @Override
                                public void onClick(SweetAlertDialog sDialog) {
@@ -126,10 +128,14 @@ public class AdapterSlider extends RecyclerView.Adapter<AdapterSlider.MyViewHold
                                    });
                                }
                            })
-                           .setCancelButton("Tidak", new SweetAlertDialog.OnSweetClickListener() {
+                           .setCancelButton("Ubah", new SweetAlertDialog.OnSweetClickListener() {
                                @Override
                                public void onClick(SweetAlertDialog sDialog) {
                                    sDialog.dismissWithAnimation();
+                                   Intent intent = new Intent(mContext, UbahSliderActivity.class);
+                                   intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                                   intent.putExtra("slider",slider);
+                                   mContext.startActivity(intent);
 
                                }
                            })

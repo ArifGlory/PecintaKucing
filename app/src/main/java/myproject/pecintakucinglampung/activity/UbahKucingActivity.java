@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.client.Firebase;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,20 +35,22 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import myproject.pecintakucinglampung.Kelas.Kucing;
-import myproject.pecintakucinglampung.Kelas.SharedVariable;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.Utils;
+import myproject.pecintakucinglampung.admin.KelolaDokterActivity;
+import myproject.pecintakucinglampung.admin.UbahDokterActivity;
 
-public class AddcatActivity extends AppCompatActivity {
+public class UbahKucingActivity extends AppCompatActivity {
 
+    Intent intent;
+    Kucing kucing;
     EditText etNama,etUmur,etRas;
     ImageView ivKucing;
-    Button btnSimpan,btnEdit;
+    Button btnSimpan;
     FirebaseFirestore firestore;
     private FirebaseAuth fAuth;
     private FirebaseAuth.AuthStateListener fStateListener;
@@ -60,28 +64,39 @@ public class AddcatActivity extends AppCompatActivity {
     static final int RC_IMAGE_GALLERY = 2;
     private String ras;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addcat);
+        setContentView(R.layout.activity_ubah_kucing);
         Firebase.setAndroidContext(this);
-        FirebaseApp.initializeApp(AddcatActivity.this);
+        FirebaseApp.initializeApp(UbahKucingActivity.this);
         fAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         ref = firestore.collection("kucing");
         fbUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        intent  = getIntent();
+        kucing = (Kucing) intent.getSerializableExtra("kucing");
+
+        Log.d("idKucing=",kucing.getIdKucing());
         btnSimpan = findViewById(R.id.btnSimpan);
-        btnEdit = findViewById(R.id.btnEdit);
         etNama = findViewById(R.id.etNama);
         etUmur = findViewById(R.id.etUmur);
         etRas = findViewById(R.id.etRas);
         ivKucing = findViewById(R.id.ivKucing);
+        if (kucing.getRas().equals("no")){
+            etRas.setText("");
+        }else{
+            etRas.setText(kucing.getRas());
+        }
+        etNama.setText(kucing.getNama());
+        etUmur.setText(kucing.getUmur());
 
+        Glide.with(this)
+                .load(kucing.getUrlGambar())
+                .into(ivKucing);
 
-        pDialogLoading = new SweetAlertDialog(AddcatActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialogLoading = new SweetAlertDialog(UbahKucingActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialogLoading.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         pDialogLoading.setTitleText("Loading..");
         pDialogLoading.setCancelable(false);
@@ -97,7 +112,7 @@ public class AddcatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(AddcatActivity.this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, RC_PERMISSION_READ_EXTERNAL_STORAGE);
+                    ActivityCompat.requestPermissions(UbahKucingActivity.this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, RC_PERMISSION_READ_EXTERNAL_STORAGE);
                 } else {
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
@@ -105,11 +120,7 @@ public class AddcatActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
-
 
     private void checkValidation() {
 
@@ -121,10 +132,9 @@ public class AddcatActivity extends AppCompatActivity {
 
         // Check if all strings are null or not
         if (getFullName.equals("") || getFullName.length() == 0
-                || getUmur.equals("") || getUmur.length() == 0
-                || uri == null) {
+                || getUmur.equals("") || getUmur.length() == 0) {
 
-            new SweetAlertDialog(AddcatActivity.this,SweetAlertDialog.ERROR_TYPE)
+            new SweetAlertDialog(UbahKucingActivity.this,SweetAlertDialog.ERROR_TYPE)
                     .setContentText("Semua data harus diisi")
                     .setTitleText("Oops..")
                     .setConfirmText("OK")
@@ -133,31 +143,43 @@ public class AddcatActivity extends AppCompatActivity {
         }
         else{
             pDialogLoading.show();
-            simpanData();
+           if (uri == null ){
+               updateWithoutGambar();
+           }else {
+               updateWithGambar();
+           }
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
-        // menangkap hasil balikan dari Place Picker, dan menampilkannya pada TextView
+    private void updateWithoutGambar(){
 
-        if (requestCode == RC_IMAGE_GALLERY && resultCode == RESULT_OK) {
-            uri = data.getData();
-            ivKucing.setImageURI(uri);
-        }
-        else if (requestCode == 100 && resultCode == RESULT_OK){
-            uri = file;
-            ivKucing.setImageURI(uri);
-        }
-    }
-
-    private void simpanData(){
         ras =  etRas.getText().toString();
         if (ras.equals("") || ras.length() == 0){
             ras = "no";
         }
+        ref.document(kucing.getIdKucing()).update("nama",etNama.getText().toString());
+        ref.document(kucing.getIdKucing()).update("ras","aku tes").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                pDialogLoading.dismiss();
+            }
+        });
+        ref.document(kucing.getIdKucing()).update("umur",etUmur.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                pDialogLoading.dismiss();
+                new SweetAlertDialog(UbahKucingActivity.this,SweetAlertDialog.SUCCESS_TYPE)
+                        .setContentText("Perubahan tersimpan")
+                        .show();
 
+                Intent intent = new Intent(getApplicationContext(), MycatActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void updateWithGambar(){
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference imagesRef = storageRef.child("images");
         StorageReference userRef = imagesRef.child(fbUser.getUid());
@@ -170,7 +192,7 @@ public class AddcatActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
-                Toast.makeText(AddcatActivity.this, "Upload failed!\n" + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(UbahKucingActivity.this, "Upload failed!\n" + exception.getMessage(), Toast.LENGTH_SHORT).show();
                 pDialogLoading.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -178,65 +200,62 @@ public class AddcatActivity extends AppCompatActivity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                Toast.makeText(AddcatActivity.this, "Upload finished!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UbahKucingActivity.this, "Upload finished!", Toast.LENGTH_SHORT).show();
+
+                ras =  etRas.getText().toString();
+                if (ras.equals("") || ras.length() == 0){
+                    ras = "no";
+                }
 
                 // save image to database
                 final String urlGambar = downloadUrl.toString();
-                Kucing kucing = new Kucing(
-                        etNama.getText().toString(),
-                        SharedVariable.userID,
-                        etUmur.getText().toString(),
-                        ras,
-                        urlGambar
-                );
-                kucing.setIdKucing(timeStamp);
-                kucing.setIsAdopsi("no");
-                kucing.setIsDijual("no");
-
-                ref.document(timeStamp).set(kucing).addOnCompleteListener(new OnCompleteListener<Void>() {
+                ref.document(kucing.getIdKucing()).update("urlGambar",urlGambar);
+                ref.document(kucing.getIdKucing()).update("nama",etNama.getText().toString());
+                ref.document(kucing.getIdKucing()).update("ras",ras);
+                ref.document(kucing.getIdKucing()).update("umur",etUmur.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         pDialogLoading.dismiss();
-                        if (task.isSuccessful()){
-                            new SweetAlertDialog(AddcatActivity.this,SweetAlertDialog.SUCCESS_TYPE)
-                                    .setContentText("Data kucing ditambahkan")
-                                    .setTitleText("Berhasil")
-                                    .setConfirmText("OK")
-                                    .show();
-
-                            resetKomponen();
-                        }else {
-                            new SweetAlertDialog(AddcatActivity.this,SweetAlertDialog.ERROR_TYPE)
-                                    .setContentText("Terjadi kesalahan")
-                                    .setTitleText("Oops..")
-                                    .setConfirmText("OK")
-                                    .show();
-                            Log.d("erorUpload:","erorGambar "+task.getException().toString());
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pDialogLoading.dismiss();
-                        new SweetAlertDialog(AddcatActivity.this,SweetAlertDialog.ERROR_TYPE)
-                                .setContentText("Terjadi kesalahan")
-                                .setTitleText("Oops..")
-                                .setConfirmText("OK")
+                        new SweetAlertDialog(UbahKucingActivity.this,SweetAlertDialog.SUCCESS_TYPE)
+                                .setContentText("Perubahan tersimpan")
                                 .show();
-                        Log.d("erorUpload:","erorGambar "+e.toString());
+
+                        Intent intent = new Intent(getApplicationContext(),MycatActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 });
 
+
+
             }
         });
-
     }
 
-    private void resetKomponen(){
-        etUmur.setText("");
-        etRas.setText("");
-        etNama.setText("");
-        ivKucing.setImageResource(R.drawable.pawprint);
-        uri = null;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        // menangkap hasil balikan dari Place Picker, dan menampilkannya pada TextView
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                String toastMsg = String.format(
+                        "Place: %s \n" +
+                                "Alamat: %s \n" +
+                                "Latlng %s \n", place.getName(), place.getAddress(), place.getLatLng().latitude+" "+place.getLatLng().longitude);
+                //tvPlaceAPI.setText(toastMsg);
+
+                Toast.makeText(getApplicationContext()," "+toastMsg,Toast.LENGTH_SHORT).show();
+            }
+        }else
+
+        if (requestCode == RC_IMAGE_GALLERY && resultCode == RESULT_OK) {
+            uri = data.getData();
+            ivKucing.setImageURI(uri);
+        }
+        else if (requestCode == 100 && resultCode == RESULT_OK){
+            uri = file;
+            ivKucing.setImageURI(uri);
+        }
     }
 }

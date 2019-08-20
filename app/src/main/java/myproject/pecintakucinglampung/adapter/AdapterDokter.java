@@ -107,9 +107,9 @@ public class AdapterDokter extends RecyclerView.Adapter<AdapterDokter.MyViewHold
                public boolean onLongClick(View v) {
                    if (SharedVariable.email.equals("admin@gmail.com")){
                        new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
-                               .setTitleText("Hapus Dokter")
-                               .setContentText("Anda yakin menghapus Dokter ini ?")
-                               .setConfirmText("Ya")
+                               .setTitleText("Kelola Dokter")
+                               .setContentText("Pilih aksi yang anda inginkan")
+                               .setConfirmText("Hapus")
                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                    @Override
                                    public void onClick(SweetAlertDialog sDialog) {

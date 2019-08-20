@@ -32,6 +32,8 @@ import myproject.pecintakucinglampung.activity.DetailKesehatanActivity;
 import myproject.pecintakucinglampung.activity.DetailcatActivity;
 import myproject.pecintakucinglampung.activity.ListKesehatanActivity;
 import myproject.pecintakucinglampung.admin.KelolaSliderActivity;
+import myproject.pecintakucinglampung.admin.UbahDokterActivity;
+import myproject.pecintakucinglampung.admin.UbahKesehatanActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -102,9 +104,9 @@ public class AdapterKesehatan extends RecyclerView.Adapter<AdapterKesehatan.MyVi
                public boolean onLongClick(View v) {
                    if (SharedVariable.email.equals("admin@gmail.com")){
                        new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
-                               .setTitleText("Hapus Data Kesehatan")
-                               .setContentText("Anda yakin menghapus data ini ?")
-                               .setConfirmText("Ya")
+                               .setTitleText("Kelola Data Kesehatan")
+                               .setContentText("Pilih aksi yang anda inginkan")
+                               .setConfirmText("Hapus")
                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                    @Override
                                    public void onClick(SweetAlertDialog sDialog) {
@@ -121,10 +123,14 @@ public class AdapterKesehatan extends RecyclerView.Adapter<AdapterKesehatan.MyVi
                                        });
                                    }
                                })
-                               .setCancelButton("Tidak", new SweetAlertDialog.OnSweetClickListener() {
+                               .setCancelButton("Ubah", new SweetAlertDialog.OnSweetClickListener() {
                                    @Override
                                    public void onClick(SweetAlertDialog sDialog) {
                                        sDialog.dismissWithAnimation();
+                                       Intent intent = new Intent(mContext, UbahKesehatanActivity.class);
+                                       intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                                       intent.putExtra("kesehatan",kesehatan);
+                                       mContext.startActivity(intent);
 
                                    }
                                })

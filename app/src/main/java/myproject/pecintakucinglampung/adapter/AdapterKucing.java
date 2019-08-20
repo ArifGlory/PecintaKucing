@@ -29,8 +29,11 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import myproject.pecintakucinglampung.Kelas.Kucing;
 import myproject.pecintakucinglampung.Kelas.SharedVariable;
 import myproject.pecintakucinglampung.R;
+import myproject.pecintakucinglampung.activity.AddcatActivity;
 import myproject.pecintakucinglampung.activity.DetailcatActivity;
 import myproject.pecintakucinglampung.activity.MycatActivity;
+import myproject.pecintakucinglampung.activity.UbahKucingActivity;
+import myproject.pecintakucinglampung.admin.UbahDokterActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -136,16 +139,20 @@ public class AdapterKucing extends RecyclerView.Adapter<AdapterKucing.MyViewHold
                     if (kucingku.getIdPemilik().equals(SharedVariable.userID)){
 
                         new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
-                                .setTitleText("Edit Kucing")
+                                .setTitleText("Kelola Kucing")
                                 .setContentText("Anda dapat melakukan perubahan data kucing ini")
                                 .setConfirmText("Ubah Data")
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
                                         sDialog.dismissWithAnimation();
+                                        Intent intent = new Intent(mContext, UbahKucingActivity.class);
+                                        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                                        intent.putExtra("kucing",kucingku);
+                                        mContext.startActivity(intent);
                                     }
                                 })
-                                .setCancelButton("Hapus Kosan", new SweetAlertDialog.OnSweetClickListener() {
+                                .setCancelButton("Hapus", new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
                                         sDialog.dismissWithAnimation();

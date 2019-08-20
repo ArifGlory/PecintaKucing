@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".admin.UbahDokterActivity"></activity>
+        <activity android:name=".activity.UbahKucingActivity"
+            android:label="Ubah Data Kucing"></activity>
+        <activity android:name=".admin.UbahKesehatanActivity" />
+        <activity android:name=".admin.UbahSliderActivity" />
+        <activity android:name=".admin.UbahDokterActivity" />
         <activity
             android:name=".admin.ChatActivity"
             android:label="Chat" />

@@ -42,6 +42,8 @@ import myproject.pecintakucinglampung.Kelas.Perawatan;
 import myproject.pecintakucinglampung.Kelas.SharedVariable;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.Utils;
+import myproject.pecintakucinglampung.admin.KelolaSliderActivity;
+import myproject.pecintakucinglampung.admin.UbahSliderActivity;
 
 public class AjukanPerawatActivity extends AppCompatActivity {
 
@@ -87,9 +89,9 @@ public class AjukanPerawatActivity extends AppCompatActivity {
         perawatanSend = (Perawatan) intent.getSerializableExtra("perawatan");
 
         if (checkIfRegistered.equals("true")){
-            etHarga.setEnabled(false);
-            etDeskripsi.setEnabled(false);
-            ivProfPict.setEnabled(false);
+            etHarga.setEnabled(true);
+            etDeskripsi.setEnabled(true);
+            ivProfPict.setEnabled(true);
 
             etHarga.setText(perawatanSend.getHarga());
             etDeskripsi.setText(perawatanSend.getDeskripsi());
@@ -125,8 +127,40 @@ public class AjukanPerawatActivity extends AppCompatActivity {
                 checkValidation();
             }
         });
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkValidationUpdate();
+            }
+        });
 
 
+    }
+
+    private void checkValidationUpdate(){
+        String getHarga = etHarga.getText().toString();
+        String getDeskripsi = etDeskripsi.getText().toString();
+
+        // Check if all strings are null or not
+        if (getHarga.equals("") || getHarga.length() == 0
+                || getDeskripsi.equals("") || getDeskripsi.length() == 0) {
+
+            new SweetAlertDialog(AjukanPerawatActivity.this,SweetAlertDialog.ERROR_TYPE)
+                    .setContentText("Semua data harus diisi")
+                    .setTitleText("Oops..")
+                    .setConfirmText("OK")
+                    .show();
+
+        }
+        else{
+            pDialogLoading.show();
+            if (uri == null){
+                updateWithoutGambar();
+            }else {
+                updateWithGambar();
+            }
+
+        }
     }
 
     private void checkValidation() {
@@ -153,6 +187,70 @@ public class AjukanPerawatActivity extends AppCompatActivity {
             pDialogLoading.show();
             simpanData();
         }
+    }
+
+    private void updateWithoutGambar(){
+        ref.document(perawatanSend.getIdPerawatan()).update("deskripsi",etDeskripsi.getText().toString());
+        ref.document(perawatanSend.getIdPerawatan()).update("harga",etHarga.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                pDialogLoading.dismiss();
+                new SweetAlertDialog(AjukanPerawatActivity.this,SweetAlertDialog.SUCCESS_TYPE)
+                        .setContentText("Perubahan tersimpan")
+                        .show();
+
+                Intent intent = new Intent(getApplicationContext(), PerawatanActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void updateWithGambar(){
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference imagesRef = storageRef.child("images");
+        StorageReference userRef = imagesRef.child(fbUser.getUid());
+        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filename = fbUser.getUid() + "_" + timeStamp;
+        StorageReference fileRef = userRef.child(filename);
+
+        UploadTask uploadTask = fileRef.putFile(uri);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Toast.makeText(AjukanPerawatActivity.this, "Upload failed!\n" + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialogLoading.dismiss();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Toast.makeText(AjukanPerawatActivity.this, "Upload finished!", Toast.LENGTH_SHORT).show();
+
+                // save image to database
+                final String urlGambar = downloadUrl.toString();
+                ref.document(perawatanSend.getIdPerawatan()).update("foto",urlGambar);
+                ref.document(perawatanSend.getIdPerawatan()).update("harga",etHarga.getText().toString());
+                ref.document(perawatanSend.getIdPerawatan()).update("deskripsi",etDeskripsi.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        pDialogLoading.dismiss();
+                        new SweetAlertDialog(AjukanPerawatActivity.this,SweetAlertDialog.SUCCESS_TYPE)
+                                .setContentText("Perubahan tersimpan")
+                                .show();
+
+                        Intent intent = new Intent(getApplicationContext(),PerawatanActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+
+
+            }
+        });
     }
 
     private void simpanData(){

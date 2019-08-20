@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBg"
-    tools:context=".activity.AddcatActivity">
+    tools:context=".admin.UbahDokterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,13 +35,14 @@
                 android:padding="20dp">
 
                 <ImageView
-                    android:id="@+id/ivKucing"
+                    android:id="@+id/ivDokter"
                     android:src="@drawable/pawprint"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:scaleType="fitCenter" />
+
                 <TextView
-                    android:id="@+id/tvName"
+                    android:id="@+id/tvNama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -66,7 +67,7 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nama Kucing"
+                        android:hint="Nama Dokter"
                         android:id="@+id/etNama"
                         android:inputType="textEmailAddress"
                         android:textColorHint="@color/black2"
@@ -85,8 +86,8 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Umur Kucing (bulan / tahun)"
-                        android:id="@+id/etUmur"
+                        android:hint="Bidang Dokter"
+                        android:id="@+id/etBidang"
                         android:inputType="textEmailAddress"
                         android:textColorHint="@color/black2"
                         android:textColor="@color/black2"
@@ -104,14 +105,61 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Ras Kucing (Optional)"
-                        android:id="@+id/etRas"
-                        android:inputType="textEmailAddress"
+                        android:hint="Nomor Handphone"
+                        android:id="@+id/etPhone"
+                        android:inputType="number"
                         android:textColorHint="@color/black2"
                         android:textColor="@color/black2"
                         />
 
                 </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/black2"
+                    android:theme="@style/myEditTextStyleBlack"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Jadwal Praktik"
+                        android:id="@+id/etJadwal"
+                        android:inputType="textMultiLine"
+                        android:lines="2"
+                        android:textColorHint="@color/black2"
+                        android:textColor="@color/black2"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/loginbutton_selector"
+                    android:padding="3dp"
+                    android:text="Ubah Alamat"
+                    android:textColor="@color/white_greyish"
+                    android:textSize="17sp"
+                    android:drawableEnd="@drawable/ic_place_white_24dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:ellipsize="end"
+                    android:visibility="gone"
+                    android:text="Alamat"
+                    android:textColor="@color/grey_800"
+                    android:textSize="13sp" />
 
 
                 <Button
@@ -122,19 +170,6 @@
                     android:background="@drawable/loginbutton_selector"
                     android:padding="3dp"
                     android:text="Simpan"
-                    android:textColor="@color/white_greyish"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnEdit"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/loginbutton_selector"
-                    android:padding="3dp"
-                    android:visibility="gone"
-                    android:text="Simpan Perubahan"
                     android:textColor="@color/white_greyish"
                     android:textSize="17sp"
                     android:textStyle="bold" />
