@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -48,7 +49,7 @@ public class UbahKucingActivity extends AppCompatActivity {
 
     Intent intent;
     Kucing kucing;
-    EditText etNama,etUmur,etRas;
+    EditText etNama,etUmur,etRas,etDokterLangganan,etJenisMakanan,etSusu,etShampo,etDeskripsiPerawatan;
     ImageView ivKucing;
     Button btnSimpan;
     FirebaseFirestore firestore;
@@ -62,7 +63,8 @@ public class UbahKucingActivity extends AppCompatActivity {
     private int PLACE_PICKER_REQUEST = 1;
     static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 1;
     static final int RC_IMAGE_GALLERY = 2;
-    private String ras;
+    private String ras,jenisKelamin,kondisi;
+    Spinner spJenisKelamin,spKondisi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,17 @@ public class UbahKucingActivity extends AppCompatActivity {
         etNama = findViewById(R.id.etNama);
         etUmur = findViewById(R.id.etUmur);
         etRas = findViewById(R.id.etRas);
+        etDokterLangganan = findViewById(R.id.etDokterLangganan);
+        etJenisMakanan = findViewById(R.id.etJenisMakanan);
+        etSusu = findViewById(R.id.etSusu);
+        etShampo = findViewById(R.id.etShampo);
+        etDeskripsiPerawatan = findViewById(R.id.etDeskripsiPerawatan);
+        spJenisKelamin = findViewById(R.id.spJenisKelamin);
+        spKondisi = findViewById(R.id.spKondisi);
+
+        jenisKelamin    = "Jantan";
+        kondisi         = "Sehat";
+
         ivKucing = findViewById(R.id.ivKucing);
         if (kucing.getRas().equals("no")){
             etRas.setText("");
@@ -91,6 +104,11 @@ public class UbahKucingActivity extends AppCompatActivity {
         }
         etNama.setText(kucing.getNama());
         etUmur.setText(kucing.getUmur());
+        etDeskripsiPerawatan.setText(kucing.getDeskripsiPerawatan());
+        etDokterLangganan.setText(kucing.getNmDokterLangganan());
+        etSusu.setText(kucing.getSusu());
+        etShampo.setText(kucing.getShampo());
+        etJenisMakanan.setText(kucing.getJenisMakanan());
 
         Glide.with(this)
                 .load(kucing.getUrlGambar())
@@ -126,20 +144,40 @@ public class UbahKucingActivity extends AppCompatActivity {
 
         // Get all edittext texts
         String getFullName = etNama.getText().toString();
-        String getUmur= etUmur.getText().toString();
+        String getUmur = etUmur.getText().toString();
+        String getRas = etRas.getText().toString();
+        String getNamaDokterLangganan = etDokterLangganan.getText().toString();
+        String getJenisMakanan = etJenisMakanan.getText().toString();
+        String getSusu = etSusu.getText().toString();
+        String getShampo = etShampo.getText().toString();
+        String getDeskripsiPerawatan = etDeskripsiPerawatan.getText().toString();
 
         Pattern p = Pattern.compile(Utils.regEx);
 
         // Check if all strings are null or not
-        if (getFullName.equals("") || getFullName.length() == 0
-                || getUmur.equals("") || getUmur.length() == 0) {
-
-            new SweetAlertDialog(UbahKucingActivity.this,SweetAlertDialog.ERROR_TYPE)
-                    .setContentText("Semua data harus diisi")
-                    .setTitleText("Oops..")
-                    .setConfirmText("OK")
-                    .show();
-
+        if (getFullName.equals("") || getFullName.length() == 0) {
+            showError("Nama harus diisi");
+        }
+        else if (getUmur.equals("") || getUmur.length() == 0) {
+            showError("Umur harus diisi");
+        }
+        else if (getRas.equals("") || getRas.length() == 0) {
+            showError("Ras harus diisi");
+        }
+        else if (getNamaDokterLangganan.equals("") || getNamaDokterLangganan.length() == 0) {
+            showError("Dokter Langganan harus diisi");
+        }
+        else if (getJenisMakanan.equals("") || getJenisMakanan.length() == 0) {
+            showError("Jenis Makanan harus diisi");
+        }
+        else if (getSusu.equals("") || getSusu.length() == 0) {
+            showError("Susu harus diisi");
+        }
+        else if (getShampo.equals("") || getShampo.length() == 0) {
+            showError("Shampo harus diisi");
+        }
+        else if (getDeskripsiPerawatan.equals("") || getDeskripsiPerawatan.length() == 0) {
+            showError("Deskripsi Perawatan harus diisi");
         }
         else{
             pDialogLoading.show();
@@ -151,6 +189,14 @@ public class UbahKucingActivity extends AppCompatActivity {
         }
     }
 
+    private void showError(String message){
+        new SweetAlertDialog(UbahKucingActivity.this,SweetAlertDialog.ERROR_TYPE)
+                .setContentText(message)
+                .setTitleText("Oops..")
+                .setConfirmText("OK")
+                .show();
+    }
+
     private void updateWithoutGambar(){
 
         ras =  etRas.getText().toString();
@@ -158,7 +204,13 @@ public class UbahKucingActivity extends AppCompatActivity {
             ras = "no";
         }
         ref.document(kucing.getIdKucing()).update("nama",etNama.getText().toString());
-        ref.document(kucing.getIdKucing()).update("ras","aku tes").addOnCompleteListener(new OnCompleteListener<Void>() {
+        ref.document(kucing.getIdKucing()).update("deskripsiPerawatan",etDeskripsiPerawatan.getText().toString());
+        ref.document(kucing.getIdKucing()).update("jenisKelamin",jenisKelamin);
+        ref.document(kucing.getIdKucing()).update("kondisiKesehatan",kondisi);
+        ref.document(kucing.getIdKucing()).update("nmDokterLangganan",etDokterLangganan.getText().toString());
+        ref.document(kucing.getIdKucing()).update("shampo",etShampo.getText().toString());
+        ref.document(kucing.getIdKucing()).update("susu",etSusu.getText().toString());
+        ref.document(kucing.getIdKucing()).update("ras",ras).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 pDialogLoading.dismiss();
@@ -212,6 +264,12 @@ public class UbahKucingActivity extends AppCompatActivity {
                 ref.document(kucing.getIdKucing()).update("urlGambar",urlGambar);
                 ref.document(kucing.getIdKucing()).update("nama",etNama.getText().toString());
                 ref.document(kucing.getIdKucing()).update("ras",ras);
+                ref.document(kucing.getIdKucing()).update("deskripsiPerawatan",etDeskripsiPerawatan.getText().toString());
+                ref.document(kucing.getIdKucing()).update("jenisKelamin",jenisKelamin);
+                ref.document(kucing.getIdKucing()).update("kondisiKesehatan",kondisi);
+                ref.document(kucing.getIdKucing()).update("nmDokterLangganan",etDokterLangganan.getText().toString());
+                ref.document(kucing.getIdKucing()).update("shampo",etShampo.getText().toString());
+                ref.document(kucing.getIdKucing()).update("susu",etSusu.getText().toString());
                 ref.document(kucing.getIdKucing()).update("umur",etUmur.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

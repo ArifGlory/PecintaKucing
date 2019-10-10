@@ -97,6 +97,7 @@
                             android:layout_height="wrap_content"
                             android:hint="No. Handphone"
                             android:id="@+id/etNope"
+                            android:maxLength="14"
                             android:inputType="number"
                             android:textColorHint="@color/black2"
                             android:textColor="@color/black2"
@@ -173,6 +174,19 @@
                         android:textColor="@color/white_greyish"
                         android:textSize="17sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Kembali ke Login"
+                        android:textAlignment="center"
+                        android:id="@+id/tvDaftar"
+                        android:onClick="keLogin"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp" />
 
 
                 </LinearLayout>

@@ -21,4 +21,15 @@
     <string name="title_activity_home_admin">HomeAdmin</string>
     <string name="title_activity_maps">Map</string>
 
+    <string-array name="listKelamin">
+        <item>Jantan</item>
+        <item>Betina</item>
+    </string-array>
+
+    <string-array name="listKondisiSehat">
+        <item>Sehat</item>
+        <item>Sakit</item>
+    </string-array>
+    <string name="title_activity_peta_rute">Map</string>
+
 </resources>

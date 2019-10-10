@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,6 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 final TextView tvPhone =  v2.findViewById(R.id.tvPhone);
                 final TextView tvAlamat =  v2.findViewById(R.id.tvAlamat);
                 final ImageView ivDokter = v2.findViewById(R.id.ivDokter);
+                final LinearLayout lineDokter = v2.findViewById(R.id.lineDokter);
 
                 for (int c=0;c<dokterList.size();c++){
                    Dokter dokterku = dokterList.get(c);
@@ -128,7 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                    }
                 }
 
-                Dokter dokter = dokterList.get(index);
+                final Dokter dokter = dokterList.get(index);
                  Glide.with(MapsActivity.this)
                         .load(dokter.getUrlGambar())
                         .into(ivDokter);
@@ -138,6 +140,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 tvJadwal.setText("Jadwal Praktik = "+dokter.getJadwal());
                 tvBidang.setText("Bidang = "+dokter.getBidang());
                 tvPhone.setText(dokter.getPhone());
+
+                lineDokter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Double lat = Double.valueOf(dokter.getLat());
+                        Double lon = Double.valueOf(dokter.getLon());
+                        LatLng posisiTarget = new LatLng(lat,lon);
+
+                        Intent intent = new Intent(getApplicationContext(),PetaRuteActivity.class);
+                        intent.putExtra("alamatKirim",dokter.getAlamat());
+                        intent.putExtra("posisiTarget",posisiTarget);
+                        startActivity(intent);
+
+                        dialog.dismiss();
+                    }
+                });
 
                 dialog.show();
 

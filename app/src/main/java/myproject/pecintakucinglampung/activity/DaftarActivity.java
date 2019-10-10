@@ -1,13 +1,17 @@
 package myproject.pecintakucinglampung.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +32,7 @@ import java.util.regex.Pattern;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import myproject.pecintakucinglampung.Kelas.UserModel;
+import myproject.pecintakucinglampung.MainActivity;
 import myproject.pecintakucinglampung.R;
 import myproject.pecintakucinglampung.Utils;
 
@@ -70,6 +75,7 @@ public class DaftarActivity extends AppCompatActivity {
                 checkValidation();
             }
         });
+
     }
 
     private void checkValidation() {
@@ -171,6 +177,7 @@ public class DaftarActivity extends AppCompatActivity {
                             "no"
                     );
                     userModel.setAlamat(etAlamat.getText().toString());
+                    fAuth.getCurrentUser().sendEmailVerification();
 
                     DocumentReference docUser = firestore.collection("users").document(userID);
                     docUser.set(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -179,8 +186,10 @@ public class DaftarActivity extends AppCompatActivity {
                             pDialogLoading.dismiss();
                             new SweetAlertDialog(DaftarActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText("Pendaftaran Berhasil !")
-                                    .setContentText("Akun mu telah dibuat, silakan kembali ke halaman login")
+                                    .setContentText("Email Verifikasi Dikirim")
                                     .show();
+                            Toast.makeText(getApplicationContext(),"Silahkan verifikasi email anda agar akun dapat digunakan",
+                                    Toast.LENGTH_LONG).show();
 
                             etNama.setText("");
                             etEmail.setText("");
@@ -204,6 +213,11 @@ public class DaftarActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void keLogin(View view) {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
     }
 
     /*@Override

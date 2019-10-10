@@ -117,11 +117,20 @@ public class MainActivity extends AppCompatActivity {
                     // get the Firebase user
                     FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
 
-                    // get the FCM token
-                    String token = FirebaseInstanceId.getInstance().getToken();
+                    if (fbUser.isEmailVerified()){
+                        // get the FCM token
+                        String token = FirebaseInstanceId.getInstance().getToken();
 
-                    Intent i = new Intent(MainActivity.this, SplashActivity.class);
-                    startActivity(i);
+                        Intent i = new Intent(MainActivity.this, SplashActivity.class);
+                        startActivity(i);
+                    }else{
+                        new SweetAlertDialog(MainActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Login gagal")
+                                .setContentText("Email anda belum diverifikasi")
+                                .show();
+                    }
+
+
 
                 }
 

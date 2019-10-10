@@ -109,6 +109,19 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvHarga"
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/spacing_middle"
+                        android:layout_marginLeft="@dimen/spacing_mlarge"
+                        android:layout_marginRight="@dimen/spacing_mlarge"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:text="Harga"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_90"
+                        app:fontFamily="sans-serif-medium" />
 
 
                 </LinearLayout>
@@ -146,7 +159,7 @@
                         android:textColor="@color/grey_90"
                         app:fontFamily="sans-serif-medium" />
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
@@ -157,44 +170,32 @@
                         android:paddingLeft="@dimen/spacing_medium"
                         android:paddingRight="@dimen/spacing_medium">
 
-                        <View
-                            android:layout_width="@dimen/spacing_mlarge"
-                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Umur"
+                            android:layout_marginLeft="20dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />
 
 
-                        <View
-                            android:layout_width="@dimen/spacing_mlarge"
-                            android:layout_height="wrap_content" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1 tahun"
-                                android:id="@+id/tvUmur"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_80"
-                                app:fontFamily="sans-serif-medium" />
+                            android:text="1 tahun"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvUmur"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
 
 
-                        </LinearLayout>
+                    </RelativeLayout>
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
@@ -205,44 +206,32 @@
                         android:paddingLeft="@dimen/spacing_medium"
                         android:paddingRight="@dimen/spacing_medium">
 
-                        <View
-                            android:layout_width="@dimen/spacing_mlarge"
-                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ras   "
+                            android:layout_marginLeft="20dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />
 
 
-                        <View
-                            android:layout_width="@dimen/spacing_mlarge"
-                            android:layout_height="wrap_content" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Persia"
-                                android:id="@+id/tvRas"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_80"
-                                app:fontFamily="sans-serif-medium" />
+                            android:text="Persia"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvRas"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
 
 
-                        </LinearLayout>
+                    </RelativeLayout>
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
@@ -253,42 +242,290 @@
                         android:paddingLeft="@dimen/spacing_medium"
                         android:paddingRight="@dimen/spacing_medium">
 
-                        <View
-                            android:layout_width="@dimen/spacing_mlarge"
-                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Alamat Pemilik   "
+                            android:id="@+id/tvHintAlamat"
+                            android:layout_marginLeft="20dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_80"
                             app:fontFamily="sans-serif-medium" />
 
 
-                        <View
-                            android:layout_width="@dimen/spacing_mlarge"
-                            android:layout_height="wrap_content" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="alamat"
-                                android:id="@+id/tvAlamat"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_80"
-                                app:fontFamily="sans-serif-medium" />
-
-
-                        </LinearLayout>
+                            android:text="alamat"
+                            android:layout_below="@+id/tvHintAlamat"
+                            android:layout_marginTop="5dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvAlamat"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
 
 
-                    </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jenis Kelamin"
+                            android:layout_marginLeft="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="laki"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvJenisKelamin"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kondisi Kesehatan"
+                            android:layout_marginLeft="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sehat"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvKondisiKesehatan"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dokter Langganan"
+                            android:id="@+id/tvHintDokter"
+                            android:layout_marginLeft="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dokter"
+                            android:layout_below="@+id/tvHintDokter"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvNamaDokter"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jenis Makanan"
+                            android:layout_marginLeft="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ikan"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvJenisMakanan"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Susu"
+                            android:layout_marginLeft="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Susu aja"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvSusu"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shampo"
+                            android:layout_marginLeft="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="sunsilk"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvShampo"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/spacing_medium"
+                        android:paddingRight="@dimen/spacing_medium">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Deskripsi perawatan"
+                            android:id="@+id/tvHintDeskripsi"
+                            android:layout_marginLeft="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="dimandikan"
+                            android:layout_below="@+id/tvHintDeskripsi"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/tvDeskripsiPerawatan"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80"
+                            app:fontFamily="sans-serif-medium" />
+
+
+                    </RelativeLayout>
 
 
                 </LinearLayout>
@@ -503,6 +740,19 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="@dimen/spacing_large" />
+
+            <Button
+                android:id="@+id/btnLokasi"
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/loginbutton_selector"
+                android:padding="3dp"
+                android:text="Lihat Lokasi"
+                android:textColor="@color/white_greyish"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

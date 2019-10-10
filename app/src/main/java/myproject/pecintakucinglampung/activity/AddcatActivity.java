@@ -11,9 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -44,7 +46,7 @@ import myproject.pecintakucinglampung.Utils;
 
 public class AddcatActivity extends AppCompatActivity {
 
-    EditText etNama,etUmur,etRas;
+    EditText etNama,etUmur,etRas,etDokterLangganan,etJenisMakanan,etSusu,etShampo,etDeskripsiPerawatan;
     ImageView ivKucing;
     Button btnSimpan,btnEdit;
     FirebaseFirestore firestore;
@@ -58,7 +60,8 @@ public class AddcatActivity extends AppCompatActivity {
     private int PLACE_PICKER_REQUEST = 1;
     static final int RC_PERMISSION_READ_EXTERNAL_STORAGE = 1;
     static final int RC_IMAGE_GALLERY = 2;
-    private String ras;
+    private String ras,jenisKelamin,kondisi;
+    Spinner spJenisKelamin,spKondisi;
 
 
 
@@ -79,7 +82,16 @@ public class AddcatActivity extends AppCompatActivity {
         etUmur = findViewById(R.id.etUmur);
         etRas = findViewById(R.id.etRas);
         ivKucing = findViewById(R.id.ivKucing);
+        etDokterLangganan = findViewById(R.id.etDokterLangganan);
+        etJenisMakanan = findViewById(R.id.etJenisMakanan);
+        etSusu = findViewById(R.id.etSusu);
+        etShampo = findViewById(R.id.etShampo);
+        etDeskripsiPerawatan = findViewById(R.id.etDeskripsiPerawatan);
+        spJenisKelamin = findViewById(R.id.spJenisKelamin);
+        spKondisi = findViewById(R.id.spKondisi);
 
+        jenisKelamin    = "Jantan";
+        kondisi         = "Sehat";
 
         pDialogLoading = new SweetAlertDialog(AddcatActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         pDialogLoading.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -105,6 +117,28 @@ public class AddcatActivity extends AppCompatActivity {
                 }
             }
         });
+        spJenisKelamin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                jenisKelamin = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spKondisi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                kondisi = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -115,26 +149,56 @@ public class AddcatActivity extends AppCompatActivity {
 
         // Get all edittext texts
         String getFullName = etNama.getText().toString();
-        String getUmur= etUmur.getText().toString();
+        String getUmur = etUmur.getText().toString();
+        String getRas = etRas.getText().toString();
+        String getNamaDokterLangganan = etDokterLangganan.getText().toString();
+        String getJenisMakanan = etJenisMakanan.getText().toString();
+        String getSusu = etSusu.getText().toString();
+        String getShampo = etShampo.getText().toString();
+        String getDeskripsiPerawatan = etDeskripsiPerawatan.getText().toString();
 
         Pattern p = Pattern.compile(Utils.regEx);
 
         // Check if all strings are null or not
-        if (getFullName.equals("") || getFullName.length() == 0
-                || getUmur.equals("") || getUmur.length() == 0
-                || uri == null) {
-
-            new SweetAlertDialog(AddcatActivity.this,SweetAlertDialog.ERROR_TYPE)
-                    .setContentText("Semua data harus diisi")
-                    .setTitleText("Oops..")
-                    .setConfirmText("OK")
-                    .show();
-
+        if (getFullName.equals("") || getFullName.length() == 0) {
+            showError("Nama harus diisi");
+        }
+        else if (uri == null){
+            showError("Gambar belum dipilih");
+        }
+        else if (getUmur.equals("") || getUmur.length() == 0) {
+            showError("Umur harus diisi");
+        }
+        else if (getRas.equals("") || getRas.length() == 0) {
+            showError("Ras harus diisi");
+        }
+        else if (getNamaDokterLangganan.equals("") || getNamaDokterLangganan.length() == 0) {
+            showError("Dokter Langganan harus diisi");
+        }
+        else if (getJenisMakanan.equals("") || getJenisMakanan.length() == 0) {
+            showError("Jenis Makanan harus diisi");
+        }
+        else if (getSusu.equals("") || getSusu.length() == 0) {
+            showError("Susu harus diisi");
+        }
+        else if (getShampo.equals("") || getShampo.length() == 0) {
+            showError("Shampo harus diisi");
+        }
+        else if (getDeskripsiPerawatan.equals("") || getDeskripsiPerawatan.length() == 0) {
+            showError("Deskripsi Perawatan harus diisi");
         }
         else{
             pDialogLoading.show();
             simpanData();
         }
+    }
+
+    private void showError(String message){
+        new SweetAlertDialog(AddcatActivity.this,SweetAlertDialog.ERROR_TYPE)
+                .setContentText(message)
+                .setTitleText("Oops..")
+                .setConfirmText("OK")
+                .show();
     }
 
     @Override
@@ -187,7 +251,14 @@ public class AddcatActivity extends AppCompatActivity {
                         SharedVariable.userID,
                         etUmur.getText().toString(),
                         ras,
-                        urlGambar
+                        urlGambar,
+                        jenisKelamin,
+                        etDokterLangganan.getText().toString(),
+                        kondisi,
+                        etJenisMakanan.getText().toString(),
+                        etSusu.getText().toString(),
+                        etShampo.getText().toString(),
+                        etDeskripsiPerawatan.getText().toString()
                 );
                 kucing.setIdKucing(timeStamp);
                 kucing.setIsAdopsi("no");
@@ -236,6 +307,11 @@ public class AddcatActivity extends AppCompatActivity {
         etUmur.setText("");
         etRas.setText("");
         etNama.setText("");
+        etDeskripsiPerawatan.setText("");
+        etDokterLangganan.setText("");
+        etSusu.setText("");
+        etShampo.setText("");
+        etJenisMakanan.setText("");
         ivKucing.setImageResource(R.drawable.pawprint);
         uri = null;
     }

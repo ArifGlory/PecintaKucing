@@ -113,6 +113,136 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kondisi Kesehatan"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black2"
+                    />
+
+                <Spinner
+                    android:padding="10dp"
+                    android:id="@+id/spKondisi"
+                    android:entries="@array/listKondisiSehat"
+                    android:background="@drawable/et_background1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis Kelamin"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black2"
+                    />
+
+                <Spinner
+                    android:padding="10dp"
+                    android:id="@+id/spJenisKelamin"
+                    android:entries="@array/listKelamin"
+                    android:background="@drawable/et_background1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/black2"
+                    android:theme="@style/myEditTextStyleBlack"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nama Dokter Langganan"
+                        android:id="@+id/etDokterLangganan"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/black2"
+                        android:textColor="@color/black2"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/black2"
+                    android:theme="@style/myEditTextStyleBlack"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Jenis Makanan"
+                        android:id="@+id/etJenisMakanan"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/black2"
+                        android:textColor="@color/black2"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/black2"
+                    android:theme="@style/myEditTextStyleBlack"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Susu"
+                        android:id="@+id/etSusu"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/black2"
+                        android:textColor="@color/black2"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/black2"
+                    android:theme="@style/myEditTextStyleBlack"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Shampo"
+                        android:id="@+id/etShampo"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/black2"
+                        android:textColor="@color/black2"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/black2"
+                    android:theme="@style/myEditTextStyleBlack"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Deskripsi Perawatan"
+                        android:id="@+id/etDeskripsiPerawatan"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/black2"
+                        android:textColor="@color/black2"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+
 
                 <Button
                     android:id="@+id/btnSimpan"
