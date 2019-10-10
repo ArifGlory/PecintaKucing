@@ -368,6 +368,11 @@ public class DetailcatActivity extends AppCompatActivity {
                     .load(kucingku.getUrlGambar())
                     .into(ivKucing);
         }
+        //jika untuk adopsi
+        if (kucingku.getIsAdopsi().equals("true")){
+            tvHarga.setVisibility(View.GONE);
+        }
+        
 
         //jika bukan pemilik
         if (!kucingku.getIdPemilik().equals(SharedVariable.userID)){
