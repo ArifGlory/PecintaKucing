@@ -372,7 +372,7 @@ public class DetailcatActivity extends AppCompatActivity {
         if (kucingku.getIsAdopsi().equals("true")){
             tvHarga.setVisibility(View.GONE);
         }
-        
+
 
         //jika bukan pemilik
         if (!kucingku.getIdPemilik().equals(SharedVariable.userID)){
