@@ -82,7 +82,7 @@ public class KelolaDokterActivity extends AppCompatActivity {
             }
         });
 
-        if (!SharedVariable.email.equals("admin@gmail.com")){
+        if (!SharedVariable.email.equals("tapiskuy3@gmail.com")){
             btnCreate.setVisibility(View.GONE);
         }
 

@@ -156,7 +156,7 @@ public class UbahDokterActivity extends AppCompatActivity {
         latitude = dokter.getLat();
         longitude = dokter.getLon();
 
-        if (!SharedVariable.email.equals("admin@gmail.com")){
+        if (!SharedVariable.email.equals("tapiskuy3@gmail.com")){
             etNama.setEnabled(false);
             etBidang.setEnabled(false);
             etPhone.setEnabled(false);

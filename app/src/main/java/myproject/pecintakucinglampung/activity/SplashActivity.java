@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
             SharedVariable.nama = fAuth.getCurrentUser().getDisplayName();
             String email = fAuth.getCurrentUser().getEmail();
 
-            if (email.equals("admin@gmail.com")){
+            if (email.equals("tapiskuy3@gmail.com")){
                 SharedVariable.foto = "no";
                 SharedVariable.phone = "no";
                 SharedVariable.nama = "Admin PKL";

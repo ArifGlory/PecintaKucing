@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Shader;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,6 +57,7 @@ public class AdapterKucing extends RecyclerView.Adapter<AdapterKucing.MyViewHold
         public ImageView ivKucing;
         public LinearLayout lineKucing;
         public Button btnSetting;
+        public CardView cardKucing;
 
         public MyViewHolder(View view) {
             super(view);
@@ -64,6 +67,7 @@ public class AdapterKucing extends RecyclerView.Adapter<AdapterKucing.MyViewHold
             ivKucing = view.findViewById(R.id.ivKucing);
             lineKucing = view.findViewById(R.id.lineKucing);
             btnSetting = view.findViewById(R.id.btnSetting);
+            cardKucing = view.findViewById(R.id.cardKucing);
 
         }
     }
@@ -115,6 +119,10 @@ public class AdapterKucing extends RecyclerView.Adapter<AdapterKucing.MyViewHold
 
             if ((kucingku.getIdPemilik().equals(SharedVariable.userID )&& (mContext instanceof MycatActivity))){
                 holder.btnSetting.setVisibility(View.VISIBLE);
+            }
+
+            if (kucingku.getIdPemilik().equals(SharedVariable.userID)){
+                holder.cardKucing.setBackgroundColor(res.getColor(R.color.grey_10));
             }
 
             if(!kucingku.getUrlGambar().equals("no")){
